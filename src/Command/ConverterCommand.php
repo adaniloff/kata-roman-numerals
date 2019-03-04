@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Service\Converter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,14 +26,8 @@ class ConverterCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $number = $input->getArgument('number');
 
-        if ($number) {
-            $io->note(sprintf('You passed an argument: %s', $number));
-        }
+        $value = Converter::convert($number);
 
-        if (!is_int($number)) {
-            throw new \InvalidArgumentException('Invalid argument: $number must be an int');
-        }
-
-        $io->success("Your number is: " . $number);
+        $io->success("Your number is: " . $value);
     }
 }
