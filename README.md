@@ -13,6 +13,6 @@ You can run the test suite with `php bin/phpunit`.
 You can have help to run the command with `php bin/console app:converter -h`.
 Basically, just type a number and it will print you the roman numeral equivalence.
 
-You can also use the converter if needed, by importing it as a usage and using the public method `convert`.
+You can also use the converter if needed, by importing it as a usage and using the public static method `convert`.
 
 Enjoy :) 
