@@ -17,7 +17,7 @@ class ConverterCommand extends Command
     {
         $this
             ->setDescription('Take a number as an input and convert it into a roman number')
-            ->addArgument('number', InputArgument::REQUIRED, 'Number to convert')
+            ->addArgument('number', InputArgument::REQUIRED, 'The number to convert into roman numeral')
         ;
     }
 
@@ -28,6 +28,6 @@ class ConverterCommand extends Command
 
         $value = Converter::convert($number);
 
-        $io->success("Your number is: " . $value);
+        $io->success("Your number is: $number and its roman numeral equivalence is: $value");
     }
 }

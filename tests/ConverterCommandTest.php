@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use App\Service\Converter;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
@@ -61,12 +62,15 @@ class ConverterCommandTest extends KernelTestCase
      */
     public function testCommandWithValidInput(Command $command)
     {
+        $number = 10;
+        $romanNumeral = Converter::convert($number);
+        
         $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'number' => 10,
+            'number' => $number,
         ]);
 
         $output = $commandTester->getDisplay();
-        $this->assertContains('Your number is:', $output);
+        $this->assertContains("Your number is: $number and its roman numeral equivalence is: $romanNumeral", $output);
     }
 }
