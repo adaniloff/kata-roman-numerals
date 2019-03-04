@@ -57,18 +57,18 @@ class Converter
         $romanNumeral = "";
 
         if (self::$number > 999) {
-            $romanNumeral .= self::convertThousandDigit();
+            $romanNumeral .= self::pullThousand();
         }
 
         if (self::$number > 99) {
-            $romanNumeral .= self::convertHundredthDigit();
+            $romanNumeral .= self::pullHundredth();
         }
 
         if (self::$number > 9) {
-            $romanNumeral .= self::convertDecimal();
+            $romanNumeral .= self::pullDecimal();
         }
 
-        $romanNumeral .= self::convertNumeral();
+        $romanNumeral .= self::pullNumeral();
 
         return $romanNumeral;
     }
@@ -84,7 +84,7 @@ class Converter
         }
     }
 
-    private static function convertThousandDigit(): ?string
+    private static function pullThousand(): string
     {
         $thousandNumber = (int)floor(self::$number / 1000);
         self::$number -= $thousandNumber * 1000;
@@ -92,7 +92,7 @@ class Converter
         return self::$thousands[$thousandNumber];
     }
 
-    private static function convertHundredthDigit(): ?string
+    private static function pullHundredth(): string
     {
         $hundredthNumber = (int)floor(self::$number / 100);
         self::$number -= $hundredthNumber * 100;
@@ -100,7 +100,7 @@ class Converter
         return self::$hundredths[$hundredthNumber];
     }
 
-    private static function convertDecimal(): ?string
+    private static function pullDecimal(): string
     {
         $decimalNumber = (int)floor(self::$number / 10);
         self::$number -= $decimalNumber * 10;
@@ -108,7 +108,7 @@ class Converter
         return self::$decimals[$decimalNumber];
     }
 
-    private static function convertNumeral(): ?string
+    private static function pullNumeral(): string
     {
         return self::$numerals[self::$number];
     }
